@@ -9,7 +9,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract ERC20Token is ERC20, Ownable {
 
-  uint constant FAUCET_AMT = 10 * 10^18;
+  uint constant FAUCET_AMT = 1 * 10^18;
 
   event FaucetForOwner(address indexed sender, uint amt);
 

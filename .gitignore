@@ -12,3 +12,6 @@
 cache
 artifacts
 yarn-error.log
+
+# env setting
+.env
