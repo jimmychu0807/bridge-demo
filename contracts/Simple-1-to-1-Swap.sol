@@ -19,10 +19,10 @@ contract Simple1To1Swap {
   event SwapTo(address indexed sender, address, uint);
 
   constructor(address _token1Addr, address _token2Addr, uint _ratioInThousand) {
-    require(_token1Addr != _token2Addr, "token1 address cannot be the same as the token2 address.");
+    require(_token1Addr != _token2Addr, "Same addresses");
     require(
       _ratioInThousand >= 1 && _ratioInThousand <= 1000,
-      "ratioInThousand must be within 1 - 1000 inclusive."
+      "ratioInThousand not within 1 - 1000"
     );
 
     token1Addr = _token1Addr;
@@ -33,7 +33,7 @@ contract Simple1To1Swap {
   function swap(address fromTokenAddr, address toTokenAddr, uint fromAmt) public {
     require(
       IERC20(fromTokenAddr).balanceOf(msg.sender) >= fromAmt,
-      "Insufficient tokens to swap from"
+      "Insufficient tokens"
     );
     require(
       fromTokenAddr == token1Addr || fromTokenAddr == token2Addr,

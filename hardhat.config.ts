@@ -20,6 +20,7 @@ export default {
   defaultNetwork: 'hardhat',
   networks: {
     localhost: {
+      url: 'http://127.0.0.1:8545/',
       live: false,
       saveDeployments: true,
       tags: ['local']
@@ -37,6 +38,8 @@ export default {
     },
   },
   namedAccounts: {
-    deployer: 0
+    deployer: 0,
+    alith: '0xf24FF3a9CF04c71Dbc94D0b566f7A27B94566cac',
+    baltathar: '0x3Cd0A705a2DC65e5b1E1205896BaA2be8A07c6e0',
   }
 }

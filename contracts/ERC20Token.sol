@@ -5,22 +5,18 @@
 pragma solidity ^0.8.12;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract ERC20Token is ERC20, Ownable {
+contract ERC20Token is ERC20 {
 
-  uint constant FAUCET_AMT = 1 * 10^18;
+  // uint constant FAUCET_AMT = 1 * 10^18;
 
-  event FaucetForOwner(address indexed sender, uint amt);
+  // event FaucetForOwner(address indexed sender, uint amt);
 
-  constructor(uint initialSupply, string memory _name, string memory _symbol)
-    ERC20(_name, _symbol)
+  constructor(uint initialSupply, string memory _name, string memory _symbol) ERC20(_name, _symbol)
   {
     _mint(address(this), initialSupply);
-  }
 
-  function faucetForOwner() public onlyOwner {
-    transfer(msg.sender, FAUCET_AMT);
-    emit FaucetForOwner(msg.sender, FAUCET_AMT);
+    // Allow the deployer send fund out on behalf of this contract
+    approve(msg.sender, initialSupply);
   }
 }
