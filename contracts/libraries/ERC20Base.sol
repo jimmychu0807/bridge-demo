@@ -47,6 +47,7 @@ abstract contract ERC20Base is IERC20, ERC20Internal {
     require(balances[from] >= amount, "Not enough balance");
     balances[from] -= amount;
     totalSupply -= amount;
+    emit Transfer(from, address(0), amount);
   }
 
   function approve(address spender, uint256 amount) external virtual override returns (bool) {

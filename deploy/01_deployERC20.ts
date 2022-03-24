@@ -21,17 +21,20 @@ async function deploy(hre: HardhatRuntimeEnvironment) {
   const { deployer } = await getNamedAccounts()
   const accts = await getUnnamedAccounts()
 
-  await deploy('ERC20Token', {
+  await deploy('Defi1Deployment', {
+    contract: 'ERC20',
     from: deployer,
     gasLimit: 4000000,
     args: [INITIAL_SUPPLY, 'Defi1 Token', 'DEFI1']
   })
 
-  await deploy('ERC20Token', {
+  await deploy('Defi2Deployment', {
+    contract: 'ERC20',
     from: deployer,
     gasLimit: 4000000,
     args: [INITIAL_SUPPLY, 'Defi2 Token', 'DEFI2']
   })
 }
 
+deploy.tags = ['ERC20Token']
 export default deploy
