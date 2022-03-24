@@ -18,13 +18,12 @@ async function deploy(hre: HardhatRuntimeEnvironment) {
   console.log(`deployer: ${deployer}`)
   console.log(`tokenOwner: ${tokenOwner}`)
 
-  await deploy('SimpleERC20Deployment', {
-    contract: 'SimpleERC20',
+  await deploy('SimpleERC20', {
     from: deployer,
     args: [tokenOwner, INITIAL_SUPPLY],
     log: true
   })
 }
 
-deploy.tags = ['ERC20Token']
+deploy.tags = ['erc20']
 export default deploy

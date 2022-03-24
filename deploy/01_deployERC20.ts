@@ -7,7 +7,7 @@ const isRejected = (input: PromiseSettledResult<unknown>): input is PromiseRejec
 const isFulfilled = <T>(input: PromiseSettledResult<T>): input is PromiseFulfilledResult<T> =>
   input.status === 'fulfilled'
 
-const INITIAL_SUPPLY = ethers.BigNumber.from('100000000000000000000')
+const INITIAL_SUPPLY = ethers.BigNumber.from('10000000000000000000')
 
 async function deploy(hre: HardhatRuntimeEnvironment) {
   const {
@@ -22,19 +22,19 @@ async function deploy(hre: HardhatRuntimeEnvironment) {
   const accts = await getUnnamedAccounts()
 
   await deploy('Defi1Deployment', {
-    contract: 'ERC20',
+    contract: 'ERC20Token',
     from: deployer,
     gasLimit: 4000000,
     args: [INITIAL_SUPPLY, 'Defi1 Token', 'DEFI1']
   })
 
   await deploy('Defi2Deployment', {
-    contract: 'ERC20',
+    contract: 'ERC20Token',
     from: deployer,
     gasLimit: 4000000,
     args: [INITIAL_SUPPLY, 'Defi2 Token', 'DEFI2']
   })
 }
 
-deploy.tags = ['ERC20Token']
+deploy.tags = ['erc20']
 export default deploy

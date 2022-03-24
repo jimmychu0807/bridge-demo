@@ -4,10 +4,7 @@ import { ethers, deployments, getNamedAccounts } from 'hardhat'
 describe("SimpleERC20 contract", function() {
   it("Deployment should assign the total supply of tokens to the owner", async function() {
     // deploy the contract with this line
-    await deployments.fixture(['SimpleERC20Deployment'])
-
-    debugger
-    console.log(deployments)
+    await deployments.fixture(['erc20'])
 
     const {tokenOwner} = await getNamedAccounts();
     const erc20 = await ethers.getContract('SimpleERC20')

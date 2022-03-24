@@ -3,35 +3,22 @@ import { ethers, deployments, getUnnamedAccounts, getNamedAccounts } from 'hardh
 
 const INITIAL_SUPPLY = ethers.BigNumber.from('10000000000000000000')
 
-// const setup = deployments.createFixture(async() => {
-//   await deployments.fixture('SimpleERC20')
-//   const {alith} = await getNamedAccounts()
-//   const erc20 = await deployments.get('ERC20Token')
-//   console.log(`ERC20Token deployed at: ${erc20.address}`)
-
-//   const users = await setupUsers(await getUnnamedAccounts(), erc20)
-//   return {
-//     contracts: { erc20 },
-//     users,
-//   }
-// })
-
 describe('ERC20 Token', function() {
   it("should return a new ERC20 token", async function() {
+    await deployments.fixture(['erc20'])
+    const {deployer} = await getNamedAccounts()
+    const defi1 = await ethers.getContract('Defi1Deployment', deployer)
 
-  //   const { users } = await setup()
+    expect(await defi1.name()).to.equal('Defi1 Token')
+    expect(await defi1.totalSupply()).to.equal(INITIAL_SUPPLY)
+    expect(await defi1.balanceOf(defi1.address)).to.equal(INITIAL_SUPPLY)
+  })
 
-  //   const [owner, acct1] = await ethers.getSigners()
-  //   const factory = await ethers.getContractFactory('ERC20Token')
-  //   const erc20 = await factory.deploy(INITIAL_SUPPLY, 'Defi Token', 'DEFI')
-  //   await erc20.deployed()
-
-  //   expect(await erc20.totalSupply()).to.equal(INITIAL_SUPPLY)
-  // }
-  //   // only the owner can call faucetForOwner() call
-  //   const balance0 = await erc20.balanceOf(owner)
-  //   expect(balance0).to.equal(0)
-
-  //   await erc20.faucetForOwner({from: acct1})
+  it("should allow the deployer to spend the token on behalf of the contract", async function() {
+    await deployments.fixture(['erc20'])
+    const {deployer} = await getNamedAccounts()
+    const defi1 = await ethers.getContract('Defi1Deployment', deployer)
+    await defi1.transferFrom(defi1.address, deployer, '10000')
+    expect(await defi1.balanceOf(deployer)).to.equal('10000')
   })
 })

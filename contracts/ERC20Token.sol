@@ -5,6 +5,7 @@
 pragma solidity ^0.8.12;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "hardhat/console.sol";
 
 contract ERC20Token is ERC20 {
 
@@ -15,8 +16,7 @@ contract ERC20Token is ERC20 {
   constructor(uint initialSupply, string memory _name, string memory _symbol) ERC20(_name, _symbol)
   {
     _mint(address(this), initialSupply);
-
     // Allow the deployer send fund out on behalf of this contract
-    approve(msg.sender, initialSupply);
+    _approve(address(this), msg.sender, initialSupply);
   }
 }

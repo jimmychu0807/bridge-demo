@@ -19,16 +19,16 @@ export default {
   },
   defaultNetwork: 'hardhat',
   networks: {
+    hardhat: {
+      live: false,
+      saveDeployments: true,
+      tags: ['local', 'test']
+    },
     localhost: {
       url: 'http://127.0.0.1:8545/',
       live: false,
       saveDeployments: true,
       tags: ['local']
-    },
-    hardhat: {
-      live: false,
-      saveDeployments: true,
-      tags: ['local', 'test']
     },
     rinkeby: {
       url: process.env.ALCHEMY_RINKEBY_URL,
