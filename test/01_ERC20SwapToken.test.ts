@@ -9,7 +9,7 @@ describe('ERC20 Token', function() {
     const {deployer, tokenOwner} = await getNamedAccounts()
     const defi1 = await ethers.getContract('Defi1Deployment', deployer)
 
-    expect(await defi1.name()).to.equal('Defi1 Token')
+    expect(await defi1.name()).to.equal('Swap Demo Token 1')
 
     const totalSupply = await defi1.totalSupply()
     const ownerOwned = ethers.BigNumber.from(await defi1.balanceOf(tokenOwner))
@@ -45,6 +45,6 @@ describe('ERC20 Token', function() {
 
     // successfully exchanged
     expect(await user_defi1.balanceOf(user)).to.equal(0)
-    expect(await user_defi2.balanceOf(user)).to.equal(exchangeAmt * rate / X_BASIS)
+    expect(await user_defi2.balanceOf(user)).to.equal(exchangeAmt * rate)
   })
 })

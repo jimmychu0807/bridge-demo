@@ -8,9 +8,12 @@
   "scripts": {
     "clean": "hardhat clean",
     "compile": "hardhat compile && yarn solhint:all",
-    "deploy:alttest": "hardhat deploy --tags live --network alttest",
-    "deploy:bsctestnet": "hardhat deploy --tags live --network bsctestnet",
-    "deploy:rinkeby": "hardhat deploy --tags live --network rinkeby",
+    "connect:alttest": "hardhat console --network alttest",
+    "connect:bsctestnet": "hardhat console --network bsctestnet",
+    "connect:rinkeby": "hardhat console --network rinkeby",
+    "deploy:alttest": "hardhat deploy --tags live --network alttest --reset",
+    "deploy:bsctestnet": "hardhat deploy --tags live --network bsctestnet --reset",
+    "deploy:rinkeby": "hardhat deploy --tags live --network rinkeby --reset",
     "solhint:all": "solhint 'contracts/**/*.sol'"
   },
   "devDependencies": {

@@ -19,14 +19,14 @@ async function deploy(hre: HardhatRuntimeEnvironment) {
   await deploy('Defi1Deployment', {
     contract: 'ERC20SwapToken',
     from: deployer,
-    args: [tokenOwner, 'Defi1 Token', 'DEFI1'],
+    args: [tokenOwner, 'Swap Demo Token 1', 'SWAP-TOKEN-1'],
     log: true,
   })
 
   await deploy('Defi2Deployment', {
     contract: 'ERC20SwapToken',
     from: deployer,
-    args: [tokenOwner, 'Defi2 Token', 'DEFI2'],
+    args: [tokenOwner, 'Swap Demo Token 2', 'SWAP-TOKEN-2'],
     log: true,
   })
 
@@ -35,10 +35,10 @@ async function deploy(hre: HardhatRuntimeEnvironment) {
     const tokenOwner_defi1 = await ethers.getContract('Defi1Deployment', tokenOwner)
     const tokenOwner_defi2 = await ethers.getContract('Defi2Deployment', tokenOwner)
 
-    console.log(`Set Exchange Rate at DEFI2: 1 DEFI1 : ${rate} DEFI2`)
+    console.log('Set Exchange Rate of SWAP-TOKEN-1 at SWAP-TOKEN-2')
     await tokenOwner_defi2.setExchangeRate(tokenOwner_defi1.address, X_BASIS * rate)
 
-    console.log(`Set Exchange Rate at DEFI1: ${rate} DEFI2 : 1 DEFI1`)
+    console.log('Set Exchange Rate of SWAP-TOKEN-2 at SWAP-TOKEN-1')
     await tokenOwner_defi1.setExchangeRate(tokenOwner_defi2.address, X_BASIS / rate)
   }
 }
