@@ -8,6 +8,8 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "hardhat/console.sol";
 
+uint256 constant INITIAL_SUPPLY = 1000000000000000000000;
+
 contract ERC20SwapToken is ERC20, Ownable {
 
   mapping(address => uint16) public exchangeRate;
@@ -15,13 +17,13 @@ contract ERC20SwapToken is ERC20, Ownable {
   event RemoveExchangeRate(address indexed erc20);
   event ExchangeTokens(address, uint256, address, uint256);
 
-  constructor(uint initialSupply, address owner, string memory _name, string memory _symbol)
+  constructor(address owner, string memory _name, string memory _symbol)
     ERC20(_name, _symbol) Ownable()
   {
     // Splitting half to the owner and half within the contract itself for swapping pool
     transferOwnership(owner);
-    _mint(owner, initialSupply/2);
-    _mint(address(this), initialSupply/2);
+    _mint(owner, INITIAL_SUPPLY/2);
+    _mint(address(this), INITIAL_SUPPLY/2);
   }
 
   // `rate`: the denominator is 1000. If rate = 1000, then it is a 1:1 exchange,
