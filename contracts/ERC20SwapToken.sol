@@ -19,8 +19,8 @@ contract ERC20SwapToken is ERC20, Ownable {
     ERC20(_name, _symbol) Ownable()
   {
     // Splitting half to the owner and half within the contract itself for swapping pool
-    _mint(owner, initialSupply/2);
     transferOwnership(owner);
+    _mint(owner, initialSupply/2);
     _mint(address(this), initialSupply/2);
   }
 
