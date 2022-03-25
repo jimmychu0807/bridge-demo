@@ -1,6 +1,8 @@
 import { expect } from 'chai'
 import { ethers, deployments, getUnnamedAccounts, getNamedAccounts } from 'hardhat'
 
+
+
 describe('ERC20 Token', function() {
   it("should return a new ERC20 token", async function() {
     await deployments.fixture(['erc20'])
@@ -16,7 +18,7 @@ describe('ERC20 Token', function() {
     expect(ownerOwned.add(contractOwned)).to.equal(totalSupply)
   })
 
-  it("should allow for a 1:1 tokens exchange", async function() {
+  it("should allow for tokens exchange", async function() {
     await deployments.fixture(['erc20'])
     const {deployer, tokenOwner, alith } = await getNamedAccounts()
 
@@ -24,8 +26,14 @@ describe('ERC20 Token', function() {
     const user = (await getUnnamedAccounts())[0]
 
     const tokenOwner_defi1 = await ethers.getContract('Defi1Deployment', tokenOwner)
+    const tokenOwner_defi2 = await ethers.getContract('Defi2Deployment', tokenOwner)
     const user_defi1 = await ethers.getContract('Defi1Deployment', user)
     const user_defi2 = await ethers.getContract('Defi2Deployment', user)
+    // Set the exchange rate: 1 DEFI1 = 2 DEFI2
+    const X_BASIS = 1000
+    const rate = 2000
+    await tokenOwner_defi2.setExchangeRate(tokenOwner_defi1.address, rate)
+    await tokenOwner_defi1.setExchangeRate(tokenOwner_defi2.address, X_BASIS * X_BASIS / rate)
 
     const exchangeAmt = 100000
     await tokenOwner_defi1.transfer(user, exchangeAmt)
@@ -37,6 +45,6 @@ describe('ERC20 Token', function() {
 
     // successfully exchanged
     expect(await user_defi1.balanceOf(user)).to.equal(0)
-    expect(await user_defi2.balanceOf(user)).to.equal(exchangeAmt)
+    expect(await user_defi2.balanceOf(user)).to.equal(exchangeAmt * rate / X_BASIS)
   })
 })
