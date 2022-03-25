@@ -1,4 +1,4 @@
-import { ethers } from "hardhat"
+import { ethers, deployments } from "hardhat"
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import { DeployFunction } from 'hardhat-deploy/types';
 
@@ -10,25 +10,22 @@ async function deploy(hre: HardhatRuntimeEnvironment) {
     deployments,
   } = hre
 
+  // Cannot call `.fixture()` in deploy function.
+
   const { deploy } = deployments
   const { deployer } = await getNamedAccounts()
 
-  await deploy('Defi1Deployment', {
-    contract: 'ERC20Token',
-    from: deployer,
-    gasLimit: 4000000,
-    args: [INITIAL_SUPPLY, 'Defi1 Token', 'DEFI1'],
-    log: true
-  })
+  const defi1 = await ethers.getContract('Defi1Deployment', deployer)
+  const defi2 = await ethers.getContract('Defi2Deployment', deployer)
 
-  await deploy('Defi2Deployment', {
-    contract: 'ERC20Token',
+  await deploy('SimpleSwap', {
+    contract: 'SimpleSwap',
     from: deployer,
-    gasLimit: 4000000,
-    args: [INITIAL_SUPPLY, 'Defi2 Token', 'DEFI2'],
+    args: [defi1.address, defi2.address, 1000],
     log: true
   })
 }
 
-deploy.tags = ['erc20']
+deploy.tags = ['swap']
+deploy.dependencies = ['erc20']
 export default deploy

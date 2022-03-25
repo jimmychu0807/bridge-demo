@@ -6,7 +6,7 @@ pragma solidity ^0.8.12;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
-contract Simple1To1Swap {
+contract SimpleSwap {
 
   address public token1Addr;
   address public token2Addr;

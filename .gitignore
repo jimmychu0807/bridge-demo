@@ -13,5 +13,8 @@ cache
 artifacts
 yarn-error.log
 
+# localhost deployment
+deployments/localhost
+
 # env setting
 .env

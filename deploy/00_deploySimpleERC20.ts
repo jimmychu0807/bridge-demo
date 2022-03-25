@@ -8,15 +8,10 @@ async function deploy(hre: HardhatRuntimeEnvironment) {
   const {
     getNamedAccounts,
     deployments,
-    getChainId,
-    getUnnamedAccounts
   } = hre
 
   const { deploy } = deployments
   const { deployer, tokenOwner } = await getNamedAccounts()
-
-  console.log(`deployer: ${deployer}`)
-  console.log(`tokenOwner: ${tokenOwner}`)
 
   await deploy('SimpleERC20', {
     from: deployer,
