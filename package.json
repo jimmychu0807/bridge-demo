@@ -7,10 +7,11 @@
   "private": true,
   "scripts": {
     "clean": "hardhat clean",
-    "solhint:all": "solhint 'contracts/**/*.sol'",
     "compile": "hardhat compile && yarn solhint:all",
+    "deploy:alttest": "hardhat deploy --tags live --network alttest",
+    "deploy:bsctestnet": "hardhat deploy --tags live --network bsctestnet",
     "deploy:rinkeby": "hardhat deploy --tags live --network rinkeby",
-    "deploy:bsctestnet": "hardhat deploy --tags live --network bsctestnet"
+    "solhint:all": "solhint 'contracts/**/*.sol'"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "npm:hardhat-deploy-ethers@^0.3.0-beta.13",
