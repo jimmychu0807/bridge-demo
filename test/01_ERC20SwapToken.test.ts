@@ -31,9 +31,9 @@ describe('ERC20 Token', function() {
     const user_defi2 = await ethers.getContract('Defi2Deployment', user)
     // Set the exchange rate: 1 DEFI1 = 2 DEFI2
     const X_BASIS = 1000
-    const rate = 2000
-    await tokenOwner_defi2.setExchangeRate(tokenOwner_defi1.address, rate)
-    await tokenOwner_defi1.setExchangeRate(tokenOwner_defi2.address, X_BASIS * X_BASIS / rate)
+    const rate = 2
+    await tokenOwner_defi2.setExchangeRate(tokenOwner_defi1.address, X_BASIS * rate)
+    await tokenOwner_defi1.setExchangeRate(tokenOwner_defi2.address, X_BASIS / rate)
 
     const exchangeAmt = 100000
     await tokenOwner_defi1.transfer(user, exchangeAmt)

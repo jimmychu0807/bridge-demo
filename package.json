@@ -8,7 +8,9 @@
   "scripts": {
     "clean": "hardhat clean",
     "solhint:all": "solhint 'contracts/**/*.sol'",
-    "compile": "hardhat compile && yarn solhint:all"
+    "compile": "hardhat compile && yarn solhint:all",
+    "deploy:rinkeby": "hardhat deploy --tags live --network rinkeby",
+    "deploy:bsctestnet": "hardhat deploy --tags live --network bsctestnet"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "npm:hardhat-deploy-ethers@^0.3.0-beta.13",
