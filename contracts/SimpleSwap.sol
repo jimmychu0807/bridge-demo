@@ -45,7 +45,7 @@ contract SimpleSwap {
     );
 
     uint toAmt = _getEquivalence(fromTokenAddr, toTokenAddr, fromAmt);
-    IERC20(fromTokenAddr).transferFrom(msg.sender, fromTokenAddr, fromAmt);
+    IERC20(fromTokenAddr).transfer(fromTokenAddr, fromAmt);
     IERC20(toTokenAddr).transferFrom(toTokenAddr, msg.sender, toAmt);
 
     emit SwapFrom(msg.sender, fromTokenAddr, fromAmt);

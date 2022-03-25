@@ -11,21 +11,19 @@ async function deploy(hre: HardhatRuntimeEnvironment) {
   } = hre
 
   const { deploy } = deployments
-  const { deployer } = await getNamedAccounts()
+  const { deployer, tokenOwner } = await getNamedAccounts()
 
   await deploy('Defi1Deployment', {
-    contract: 'ERC20Token',
+    contract: 'ERC20SwapToken',
     from: deployer,
-    gasLimit: 4000000,
-    args: [INITIAL_SUPPLY, 'Defi1 Token', 'DEFI1'],
+    args: [INITIAL_SUPPLY, tokenOwner, 'Defi1 Token', 'DEFI1'],
     log: true
   })
 
   await deploy('Defi2Deployment', {
-    contract: 'ERC20Token',
+    contract: 'ERC20SwapToken',
     from: deployer,
-    gasLimit: 4000000,
-    args: [INITIAL_SUPPLY, 'Defi2 Token', 'DEFI2'],
+    args: [INITIAL_SUPPLY, tokenOwner, 'Defi2 Token', 'DEFI2'],
     log: true
   })
 }
