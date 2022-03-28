@@ -1,9 +1,7 @@
 import { expect } from 'chai'
 import { ethers, deployments, getUnnamedAccounts, getNamedAccounts } from 'hardhat'
 
-
-
-describe('ERC20 Token', function() {
+describe('ERC20SwapToken', function() {
   it("should return a new ERC20 token", async function() {
     await deployments.fixture(['erc20'])
     const {deployer, tokenOwner} = await getNamedAccounts()
@@ -12,8 +10,8 @@ describe('ERC20 Token', function() {
     expect(await defi1.name()).to.equal('Swap Demo Token 1')
 
     const totalSupply = await defi1.totalSupply()
-    const ownerOwned = ethers.BigNumber.from(await defi1.balanceOf(tokenOwner))
-    const contractOwned = ethers.BigNumber.from(await defi1.balanceOf(defi1.address))
+    const ownerOwned = await defi1.balanceOf(tokenOwner)
+    const contractOwned = await defi1.balanceOf(defi1.address)
 
     expect(ownerOwned.add(contractOwned)).to.equal(totalSupply)
   })

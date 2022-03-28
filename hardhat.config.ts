@@ -53,9 +53,16 @@ export default {
     },
   },
   namedAccounts: {
-    deployer: 0,
-    tokenOwner: 0,
-    alith: '0xf24FF3a9CF04c71Dbc94D0b566f7A27B94566cac',
-    baltathar: '0x3Cd0A705a2DC65e5b1E1205896BaA2be8A07c6e0',
+    deployer: {
+      default: 0,
+      // dev alith account
+      rinkeby: '0xf24FF3a9CF04c71Dbc94D0b566f7A27B94566cac',
+      alttest: '0xf24FF3a9CF04c71Dbc94D0b566f7A27B94566cac',
+      bsctestnet: '0xf24FF3a9CF04c71Dbc94D0b566f7A27B94566cac',
+    },
+    tokenOwner: 1,
+    alice:      2,
+    bob:        3,
+    charlie:    4,
   }
 }
