@@ -43,5 +43,5 @@ async function deploy(hre: HardhatRuntimeEnvironment) {
   }
 }
 
-deploy.tags = ['erc20', 'live']
+deploy.tags = ['erc20']
 export default deploy
