@@ -31,7 +31,7 @@ contract OrderBook {
   event OrderCancelled(uint256);
   event OrderExecuted(address indexed, uint256);
 
-  function placeOrder(address tokenBid, uint256 bidAmt, address tokenAsk, uint256 askAmt) public {
+  function placeOrder(address tokenBid, uint256 bidAmt, address tokenAsk, uint256 askAmt) public returns (uint256) {
     // TODO: check the tokenBid and tokenAsk fulfill the
 
     require(IERC20(tokenBid).balanceOf(msg.sender) >= bidAmt, "Insufficient bid token");
@@ -45,6 +45,8 @@ contract OrderBook {
     // Approve this contract to spend your token
     IERC20(tokenBid).approve(address(this), bidAmt);
     emit OrderPlaced(msg.sender, index, tokenBid, bidAmt, tokenAsk, askAmt);
+
+    return index;
   }
 
   function cancelOrder(uint256 index) public {
