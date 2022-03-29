@@ -40,7 +40,6 @@ async function deploy(hre: HardhatRuntimeEnvironment) {
       contract: 'MyERC20PresetMinterPauser',
       from: deployer,
       args: ['Defi2 Token', 'DEFI2'],
-      nonce: 1
     })
 
     // mint the two tokens

@@ -81,4 +81,8 @@ contract OrderBook {
     order.timestamp = block.timestamp;
     emit OrderExecuted(msg.sender, index);
   }
+
+  function ordersLen() public view returns (uint256) {
+    return orders.length;
+  }
 }
