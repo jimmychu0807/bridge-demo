@@ -9,8 +9,8 @@ const config = {
     "OrderBook": null,
   },
   "alttest": {
-    "DEFI1": "0x640fb349744895e55b917be1b9f554c12bfe9fdb",
-    "DEFI2": "0x4e8667bf8ddd17e4807fb94f418bef3bb9b7df44",
+    "DEFI1": "0x508353171a407529D09382F4f2F035D1Ff1Af448",
+    "DEFI2": "0x8c714d2f35eca0edfff97ccc7c3d4e00edea8f3b",
     "OrderBook": "0x5F48872D2F81d555c287F1dc2379B6E5fe1346C8",
   }
 }
